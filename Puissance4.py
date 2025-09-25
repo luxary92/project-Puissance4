@@ -46,3 +46,7 @@ def winning_move(board, piece):
             if all(board[r+i][c+i] == piece for i in range(4)):
                 return True
     return False
+
+
+def full_board(board):
+    return all(board[0][c] != " " for c in range(COLS))
