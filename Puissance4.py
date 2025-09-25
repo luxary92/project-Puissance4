@@ -22,3 +22,27 @@ def get_next_open_row(board, col):
 
 def drop_piece(board, row, col, piece):
     board[row][col] = piece
+
+
+def winning_move(board, piece):
+    #A l'horizontal
+    for r in range(ROWS):
+        for c in range(COLS-3):
+            if all(board[r][c+i] == piece for i in range(4)):
+                return True
+    # A la vertical
+    for c in range(COLS):
+        for r in range(ROWS-3):
+            if all(board[r+i][c] == piece for i in range(4)):
+                return True
+    #En  diagonale vers la droite  
+    for r in range(3, ROWS):
+        for c in range(COLS-3):
+            if all(board[r-i][c+i] == piece for i in range(4)):
+                return True
+    # En diagonale vers la gauche 
+    for r in range(ROWS-3):
+        for c in range(COLS-3):
+            if all(board[r+i][c+i] == piece for i in range(4)):
+                return True
+    return False
