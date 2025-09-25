@@ -10,3 +10,15 @@ def print_board(board):
     for row in board:
         print("| " + " | ".join(row) + " |")
         print("+" + "---+"*COLS)
+
+def is_valid_move(board, col):
+    return board[0][col] == " "
+
+def get_next_open_row(board, col):
+    for r in range(ROWS-1, -1, -1):
+        if board[r][col] == " ":
+            return r
+    return None
+
+def drop_piece(board, row, col, piece):
+    board[row][col] = piece
