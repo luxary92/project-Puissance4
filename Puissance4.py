@@ -50,3 +50,37 @@ def winning_move(board, piece):
 
 def full_board(board):
     return all(board[0][c] != " " for c in range(COLS))
+
+def main():
+    board = create_board()
+    game_over = False
+    turn = 0
+    pieces = ["X", "O"]
+
+    print_board(board)
+    
+    while not game_over:
+        col = input(f"Joueur {turn+1} ({pieces[turn]}), entre la colonne (0-{COLS-1}): ")
+        if not col.isdigit() or int(col) not in range(COLS):
+            print("Colonne invalide, réessayez.")
+            continue
+        col = int(col)
+
+        if is_valid_move(board, col):
+            row = get_next_open_row(board, col)
+            drop_piece(board, row, col, pieces[turn])
+            print_board(board)
+
+            if winning_move(board, pieces[turn]):
+                print(f"GG ! Joueur {turn+1} ({pieces[turn]}) a win !")
+                game_over = True
+            elif full_board(board):
+                print("Egalité")
+                game_over = True
+            else:
+                turn = (turn + 1) % 2
+        else:
+            print("Colonne replie, réessayez")
+
+if __name__ == "__main__":
+    main()
