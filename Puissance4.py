@@ -1,6 +1,6 @@
 ROWS = 6
 COLS = 7
-
+"""Crée une grille vide de taille ROWS x COLS"""
 def create_board():
     return [[" " for _ in range(COLS)] for _ in range(ROWS)]
 
@@ -10,7 +10,7 @@ def print_board(board):
     for row in board:
         print("| " + " | ".join(row) + " |")
         print("+" + "---+"*COLS)
-
+ """Vérifie si un coup est valide (colonne non pleine)"""
 def is_valid_move(board, col):
     return board[0][col] == " "
 
@@ -23,7 +23,7 @@ def get_next_open_row(board, col):
 def drop_piece(board, row, col, piece):
     board[row][col] = piece
 
-
+"""Vérifie si le joueur a gagné (4 jetons alignés)"""
 def winning_move(board, piece):
     #A l'horizontal
     for r in range(ROWS):
